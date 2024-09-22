@@ -1,23 +1,17 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import SocialButton from "../components/sociallogin";
 import { loginUser } from "../utils/api";
-import { loginSchema } from "../utils/validationSchemas"; // Import the schema
+import { loginSchema } from "../utils/validationSchemas"; 
+import { socialLogins } from "../utils/maps";
 
 export default function Enter() {
   const router = useRouter();
-  const socialLogins = [
-    { social: "Apple", logo: "/socials/apple-logo.svg" },
-    { social: "Facebook", logo: "/socials/facebook-logo.svg" },
-    { social: "Forem", logo: "/socials/forem-logo.svg" },
-    { social: "GitHub", logo: "/socials/github-logo.svg" },
-    { social: "Google", logo: "/socials/google-logo.svg" },
-    { social: "Twitter (X)", logo: "/socials/twitter-logo.svg" },
-  ];
+  const { state } = router.query; 
 
   const {
     register,
@@ -25,16 +19,26 @@ export default function Enter() {
     formState: { errors },
     setError,
   } = useForm({
-    resolver: yupResolver(loginSchema), // Use the Yup schema here
+    resolver: yupResolver(loginSchema), 
   });
 
   const [newUser, setNewUser] = useState(false);
 
+  useEffect(() => {
+    if (state === "new-user") {
+      setNewUser(true);
+    } else {
+      setNewUser(false);
+    }
+  }, [state]);
+
   const onSubmitLogin = async (data) => {
     try {
       const result = await loginUser(data);
-      localStorage.setItem("token", result.data.token);
-      router.push("/");
+      if (result.data.token) {
+        localStorage.setItem("token", result.data.token);
+        router.push("/");
+      }
     } catch (error) {
       if (error.message.includes("Invalid email or password")) {
         setError("password", { message: "Invalid email or password" });
@@ -42,25 +46,18 @@ export default function Enter() {
     }
   };
 
-  const handleNewUser = (value) => {
-    setNewUser(value);
-    if (value) {
-      router.push("/enter?state=new-user");
-    } else {
-      router.push("/enter");
-    }
-  };
-
   return (
     <main className="bg-white min-h-screen min-w-screen flex justify-center ">
       <div className="pt-6 px-2 lg:w-1/2 max-w-screen-sm">
         <div className="flex flex-col items-center">
-          <Image
-            src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
-            alt="Vercel Logo"
-            width={60}
-            height={48}
-          />
+          <Link href="/">
+            <Image
+              src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
+              alt="Vercel Logo"
+              width={60}
+              height={48}
+            />
+          </Link>
           <h1 className="text-3xl font-bold mt-6">Join the DEV Community</h1>
           <p className="text-neutral-700 mt-1 text-center">
             DEV Community is a community of 2,083,186 amazing developers
