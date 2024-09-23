@@ -1,40 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dev.to Clone Challenge
 
-## Getting Started
+This repository contains the implementation of a functional clone of the [dev.to](https://dev.to) website as part of a React module challenge. The goal is to recreate key features such as user registration, login, viewing posts, post details, and post creation, while connecting to a backend API for handling users and posts.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- User registration and login with API integration.
+- Display a list of posts fetched from the API.
+- View post details, including comments and reactions.
+- Create new posts and interact with the API for post creation.
+- Fully responsive UI using Tailwind CSS and clsx for conditional styles.
+
+## Installation Instructions
+
+1. Clone this repository:
+  ```
+   git clone https://github.com/morwen44/devtofinal.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate into the project directory:
+```
+   cd devto-clone
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+3. Install the dependencies:
+```
+   npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+4. Create an `.env` file at the root of the project and add your environment variables (e.g., API base URL):
+```
+   NEXT_PUBLIC_API_URL=https://blog-restful.onrender.com
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Running the Project Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Start the development server:
+```
+   npm run dev
+   ```
 
-## Learn More
+2. Open your browser and navigate to http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Tools Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js: Framework for React with server-side rendering and static site generation.
+- React Hook Form: Managing forms with ease, including validation.
+- Tailwind CSS: Utility-first CSS framework for styling.
+- clsx: Utility for conditionally applying class names.
+- Fetch API: For making API calls to the backend.
+- LocalStorage: For storing authentication tokens.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## API Used
 
-## Deploy on Vercel
+The backend API is hosted on Render, and you can find the repository for it here:  
+```
+API Repository: https://github.com/morwen44/blog-restful
+```
+## Live Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is deployed on Vercel. Check it out live:  
+```
+Live Version: https://devtofinal.vercel.app
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployment
+
+The backend API is deployed on Render:  
+```
+API Deployment: https://blog-restful.onrender.com
+```
