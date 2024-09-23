@@ -39,6 +39,10 @@ export const PostsProvider = ({ children }) => {
   const getPostById = (id) => {
     return posts.find((post) => post._id === id);
   };
+  const getAllUniqueTags = () => {
+    const allTags = posts.flatMap(post => post.tags || []); // Flatten the tags from all posts
+    return [...new Set(allTags)]; // Use Set to remove duplicates
+  };
 
   return (
     <PostsContext.Provider
@@ -49,6 +53,7 @@ export const PostsProvider = ({ children }) => {
         loading,
         handleSearchChange,
         getPostById,
+        getAllUniqueTags
       }}
     >
       {children}
