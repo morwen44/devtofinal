@@ -20,14 +20,14 @@ export default function PostDetail() {
     if (id) {
       const fetchedPost = getPostById(id);
       setPost(fetchedPost);
-      setLocalReactions(fetchedPost.reactions || []); // Initialize reactions
+      setLocalReactions(fetchedPost.reactions || []);
     }
   }, [id, getPostById]);
 
   const handleAddReaction = async (emoji) => {
     try {
       const result = await addReaction(id, emoji);
-      setLocalReactions(result.data.reactions); // Update local reactions
+      setLocalReactions(result.data.reactions);
     } catch (error) {
       console.error("Error adding reaction:", error);
     }
@@ -39,29 +39,36 @@ export default function PostDetail() {
 
   return (
     <>
-      <Head><title>{post.title}</title></Head>
-    <MainLayout>
-      <main className="flex flex-col min-h-screen mt-4">
-        <div className="flex-grow flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-[2rem_56rem_8rem] gap-4 w-full max-w-[1340px]">
-            <Stats comments={post.comments} onAddReaction={handleAddReaction} reactions={localReactions}  />
-            <Post
-              id={post._id}
-              date={post.createdAt}
-              title={post.title}
-              body={post.body}
-              image={post.image}
-              user={post.user}
-              comments={post.comments || []}
-              reactions={localReactions} // Pass reactions to Post
-              onAddReaction={handleAddReaction} // Pass the function to Post
-              className="col-span-1" 
-            />
-            <UserCard user={post.user} />
+      <Head>
+        <title>{post.title}</title>
+      </Head>
+      <MainLayout>
+        <main className="flex flex-col min-h-screen mt-4">
+          <div className="flex-grow flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-[2rem_56rem_8rem] gap-4 w-full max-w-[1340px] mx-auto px-4 md:px-0">
+              <Stats
+                comments={post.comments}
+                onAddReaction={handleAddReaction}
+                reactions={localReactions}
+              />
+              <Post
+                id={post._id}
+                date={post.createdAt}
+                title={post.title}
+                body={post.body}
+                image={post.image}
+                user={post.user}
+                comments={post.comments || []}
+                reactions={localReactions}
+                onAddReaction={handleAddReaction}
+                className="col-span-1"
+              />
+              <UserCard user={post.user} />
+            </div>
           </div>
-        </div>
-        <Footer />
-      </main>
-    </MainLayout></>
+          <Footer />
+        </main>
+      </MainLayout>
+    </>
   );
 }
