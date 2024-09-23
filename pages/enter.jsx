@@ -8,10 +8,12 @@ import SocialButton from "../components/sociallogin";
 import { loginUser } from "../utils/api";
 import { loginSchema } from "../utils/validationSchemas"; 
 import { socialLogins } from "../utils/maps";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Enter() {
   const router = useRouter();
   const { state } = router.query; 
+  const { setIsLoggedIn } = useAuth(); 
 
   const {
     register,
@@ -37,7 +39,8 @@ export default function Enter() {
       const result = await loginUser(data);
       if (result.data.token) {
         localStorage.setItem("token", result.data.token);
-        router.push("/");
+        setIsLoggedIn(true); 
+        router.push("/"); 
       }
     } catch (error) {
       if (error.message.includes("Invalid email or password")) {

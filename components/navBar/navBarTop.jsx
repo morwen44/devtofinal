@@ -1,32 +1,41 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useUser } from "@/context/UserContext";
+import Dropdown from "./dropdown";
+import { usePosts } from "@/context/PostsContext"; 
 
 export default function NavBarTop() {
   const { isLoggedIn } = useAuth();
   const { user } = useUser();
-  
+  const { handleSearchChange } = usePosts(); 
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
 
   return (
     <nav className="bg-white shadow-sm h-14 p-2">
       <div className="flex justify-between items-center max-w-[1340px] mx-auto">
         <div className="flex items-center w-[46rem]">
-          <Image
-            src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
-            alt="DEV Community Logo"
-            width={50}
-            height={40}
-            className="me-2"
-          />
+          <Link href="/">
+            <Image
+              src="https://dev-to-uploads.s3.amazonaws.com/uploads/logos/original_logo_0DliJcfsTcciZen38gX9.png"
+              alt="DEV Community Logo"
+              width={50}
+              height={40}
+              className="me-2"
+            />
+          </Link>
           <div className="w-full flex items-center relative">
             <input
               className="p-1 h-[40px] w-full lg:ps-12 ps-3 pr-10 border text-neutral-800 border-neutral-300 rounded-md focus:outline-none focus:border-2 focus:bg-white focus:border-purple hidden md:block"
               placeholder="Search..."
+              onChange={handleSearchChange} 
             />
-            <button
-              className="hover:bg-ghostpurple p-2 rounded-md absolute top-1/2 transform -translate-y-1/2 w-10 h-10 flex justify-center items-center sm:right-2 md:left-2"
-            >
+            <button className="hover:bg-ghostpurple p-2 rounded-md absolute top-1/2 transform -translate-y-1/2 w-10 h-10 flex justify-center items-center sm:right-2 md:left-2">
               <Image
                 src="/icons/search-icon.svg"
                 alt="search icon"
@@ -47,27 +56,31 @@ export default function NavBarTop() {
             </span>
           </div>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center relative">
           {isLoggedIn ? (
             <>
-              <Link href="/posts/createpost">
+              <Link href="/posts/new">
                 <button className="text-purple border border-purple py-2 px-3 w-auto rounded-md text-nowrap hover:bg-purple hover:text-white hover:underline hidden md:block">
                   Create Post
                 </button>
               </Link>
               <Image
-                src="/icons/notification-icon.svg" 
-                alt="Some Image"
+                src="/icons/notification-icon.svg"
+                alt="Notifications"
                 width={24}
                 height={24}
               />
-              <Image
-                src="/path/to/profile/pic.jpg"
-                alt="User Profile"
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
+              <div className="relative">
+                <Image
+                  src={user?.profilePic}
+                  alt="User Profile"
+                  width={30}
+                  height={30}
+                  className="rounded-full cursor-pointer"
+                  onClick={toggleMenu}
+                />
+                {menuVisible && <Dropdown user={user} />}
+              </div>
             </>
           ) : (
             <>

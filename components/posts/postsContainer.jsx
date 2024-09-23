@@ -4,11 +4,10 @@ import { usePosts } from "@/context/PostsContext";
 import Post from "./post";
 
 export default function PostsContainer() {
-    const { posts, loading } = usePosts();
-    if (loading) return <p>Loading posts...</p>;
+  const { filteredPosts, loading } = usePosts();
+  if (loading) return <p>Loading posts...</p>;
 
   return (
-    
     <div className="pt-4 w-[580px]">
       <div className="flex ">
         {filters.map((filter, index) => (
@@ -16,15 +15,19 @@ export default function PostsContainer() {
         ))}
       </div>
       <div className="pt-2">
-        
-     
-      {
-      posts.map(post => (
-        <Post key={post._id} title={post.title} body={post.body} image={post.image} user={post.user} date={post.createdAt} />
-      ))}
-    </div>
-
-
+        {filteredPosts.map((post) => (
+          <Post
+            key={post._id}
+            id={post._id}
+            date={post.createdAt}
+            title={post.title}
+            body={post.body}
+            image={post.image}
+            user={post.user}
+            comments={post.comments || []}
+          />
+        ))}
+      </div>
     </div>
   );
 }

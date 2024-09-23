@@ -53,6 +53,7 @@ export const getUserInfo = async () => {
     throw new Error("User is not authenticated");
   }
 
+
   try {
     const response = await fetch(`${API_URL}/users/me`, {
       method: "GET",
@@ -60,13 +61,13 @@ export const getUserInfo = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (!response.ok) {
       const errorData = await response.text();
       throw new Error(errorData || "Failed to fetch user information.");
     }
 
     const userInfo = await response.json();
+    
     return userInfo;
   } catch (error) {
     console.error("Error fetching user info:", error);
@@ -92,3 +93,56 @@ export const getAllPosts = async (search) => {
     throw error.message;
   }
 };
+
+export const addCommentToPost = async (postId, commentData) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("User is not authenticated");
+  }
+  console.log("tokencomment", token)
+  console.log("commentData", commentData)
+
+  try {
+    const response = await fetch(`${API_URL}/posts/${postId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(commentData),
+    });
+console.log("response", response)
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to add comment.");
+    }
+
+    const newComment = await response.json();
+    return newComment;
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    throw error;
+  }
+};
+
+export const getCommentsForPost = async (postId) => {
+  try {
+    const response = await fetch(`${API_URL}/posts/${postId}/comments`, {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to fetch comments.");
+    }
+
+    return await response.json(); 
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    throw error; 
+  }
+};
+
