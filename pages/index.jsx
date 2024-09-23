@@ -12,8 +12,8 @@ export default function Home() {
         <title>DEV Community</title>
       </Head>
       <MainLayout>
-        <main className="flex justify-around">
-          <div className="grid grid-cols-[auto_auto_auto] gap-4 max-w-[1340px]">
+      <main className="flex justify-center px-2">
+      <div className="grid grid-cols-1 md:grid-cols-[auto_auto_auto] gap-4 max-w-[1340px] w-full">
             <NavLeft />
             <PostsContainer />
           </div>

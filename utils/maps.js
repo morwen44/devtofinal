@@ -41,3 +41,12 @@ export const socialLogins = [
 ];
 
 export const filters = ["Relevant", "Latest", "Top"];
+
+export const reactions = [
+  { reaction: "heart", icon: "/icons/heart-icon.svg" },
+  { reaction: "unicorn", icon: "/icons/unicorn-icon.svg" },
+  
+  { reaction: "hooray", icon: "/icons/hooray-icon.svg" },
+  { reaction: "rocket", icon: "/icons/rocket-icon.svg" },
+  { reaction: "eyes", icon: "/icons/eyes-icon.svg" },
+];

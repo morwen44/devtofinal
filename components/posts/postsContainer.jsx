@@ -8,7 +8,7 @@ export default function PostsContainer() {
   if (loading) return <p>Loading posts...</p>;
 
   return (
-    <div className="pt-4 w-[580px]">
+    <div className="pt-4 w-full md:w-[580px] flex-grow-1">
       <div className="flex ">
         {filters.map((filter, index) => (
           <Filter key={index} filter={filter} />

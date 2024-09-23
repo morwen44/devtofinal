@@ -15,8 +15,8 @@ export default function CreatePost() {
     <>
       <NavPost />
       <main className="flex justify-center">
-        <div className="grid grid-cols-3 gap-6 w-[1100px]">
-          <div className="col-span-2 bg-white border border-neutral-100 rounded-md">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-[1100px]">
+          <div className="col-span-1 md:col-span-2 bg-white border border-neutral-100 rounded-md w-full">
             <form className="flex flex-col p-4" onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="text"
@@ -63,7 +63,9 @@ export default function CreatePost() {
               </div>
             </form>
           </div>
-          <div className="w-72 grid grid-rows-[6rem_4rem_3rem_1fr] gap-4">
+
+          {/* This section will be hidden on smaller screens */}
+          <div className="hidden md:block w-full md:w-72 grid grid-rows-[6rem_4rem_3rem_1fr] gap-4">
             {focusedSection === "title" && (
               <div className="row-start-2">
                 <h5 className="font-bold mb-1">Writing a Great Post Title</h5>

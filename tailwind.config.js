@@ -11,7 +11,7 @@ module.exports = {
         purple: "#3b49df",
         lightpurple: "#5063ff",
         darkpurple: "#2f3ab2",
-        ghostpurple: "rgba(59, 73, 223, 0.1)", // Custom colors added
+        ghostpurple: "rgba(59, 73, 223, 0.1)", 
       },
     },
   },

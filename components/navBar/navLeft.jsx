@@ -10,7 +10,7 @@ export default function NavLeft() {
 
   return (
     <>
-      <div className="flex flex-col w-60 gap-4 pt-4">
+      <div className="flex flex-col w-60 gap-4 pt-4 hidden md:block">
          {!isLoggedIn && ( 
           <div className="bg-white rounded-md p-4 flex flex-col border border-neutral-200 ">
             <h5 className="mb-4 font-bold text-xl">
