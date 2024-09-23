@@ -1,5 +1,5 @@
 import Filter from "@/components/posts/filters";
-import { filters } from "@/utils/maps";
+import { filters, reactions } from "@/utils/maps";
 import { usePosts } from "@/context/PostsContext";
 import Post from "./post";
 
@@ -25,6 +25,7 @@ export default function PostsContainer() {
             image={post.image}
             user={post.user}
             comments={post.comments || []}
+            reactions={post.reactions || []}
           />
         ))}
       </div>

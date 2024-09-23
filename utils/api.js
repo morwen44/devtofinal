@@ -146,3 +146,20 @@ export const getCommentsForPost = async (postId) => {
   }
 };
 
+
+export const addReaction = async (postId, emoji) => {
+  const response = await fetch(`https://blog-restful.onrender.com/posts/${postId}/reactions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`, 
+    },
+    body: JSON.stringify({ emoji }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to add reaction');
+  }
+
+  return await response.json();
+};
