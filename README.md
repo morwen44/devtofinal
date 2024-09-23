@@ -13,31 +13,36 @@ This repository contains the implementation of a functional clone of the [dev.to
 ## Installation Instructions
 
 1. Clone this repository:
-  ```
-   git clone https://github.com/morwen44/devtofinal.git
+
+```
+ git clone git@github.com:morwen44/devtofinal.git
 ```
 
 2. Navigate into the project directory:
+
 ```
-   cd devto-clone
+   cd devtofinal
 ```
 
 3. Install the dependencies:
+
 ```
    npm install
 ```
 
 4. Create an `.env` file at the root of the project and add your environment variables (e.g., API base URL):
+
 ```
    NEXT_PUBLIC_API_URL=https://blog-restful.onrender.com
-   ```
+```
 
 ## Running the Project Locally
 
 1. Start the development server:
+
 ```
    npm run dev
-   ```
+```
 
 2. Open your browser and navigate to http://localhost:3000.
 
@@ -52,20 +57,24 @@ This repository contains the implementation of a functional clone of the [dev.to
 
 ## API Used
 
-The backend API is hosted on Render, and you can find the repository for it here:  
+The backend API is hosted on Render, and you can find the repository for it here:
+
 ```
 API Repository: https://github.com/morwen44/blog-restful
 ```
+
 ## Live Project
 
-The project is deployed on Vercel. Check it out live:  
+The project is deployed on Vercel. Check it out live:
+
 ```
 Live Version: https://devtofinal.vercel.app
 ```
 
 ## Deployment
 
-The backend API is deployed on Render:  
+The backend API is deployed on Render:
+
 ```
 API Deployment: https://blog-restful.onrender.com
 ```

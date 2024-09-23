@@ -26,7 +26,7 @@ export default function NavBarTop() {
   };
 
   return (
-    <nav className="bg-white shadow-sm h-14 p-2">
+    <nav className="bg-white shadow-sm h-14 p-2 min-w-min">
       <div className="flex justify-between items-center max-w-[1340px] mx-auto">
         <div className="sm:block md:hidden">
           <button
