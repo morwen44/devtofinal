@@ -196,9 +196,9 @@ export default function Post({ id, date, title, body, image, user }) {
           </div>
           <h2 className="text-3xl font-bold">{title}</h2>
           <p>Tags</p>
-          {/* Conditionally render comments or prompt */}
-          {comments && comments.length > 0 ? (
-            <div className="ps-12">{/* Render comments here */}</div>
+       
+          {localComments && localComments.length > 0 ? (
+            <div className="ps-12"></div>
           ) : (
             <span className="ps-12 text-purple-600 cursor-pointer">
               Add comment
