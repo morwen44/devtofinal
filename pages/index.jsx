@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <MainLayout>
       <main className="flex justify-center px-2">
-      <div className="grid grid-cols-1 md:grid-cols-[auto_auto_auto] gap-4 max-w-[1340px] w-full">
+      <div className="grid grid-cols-1 md:grid-cols-[16rem_1fr_23rem] gap-2 max-w-[1340px] w-full">
             <NavLeft />
             <PostsContainer />
           </div>

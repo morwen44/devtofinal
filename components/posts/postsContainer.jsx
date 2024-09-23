@@ -8,13 +8,13 @@ export default function PostsContainer() {
   if (loading) return <p>Loading posts...</p>;
 
   return (
-    <div className="pt-4 w-full md:w-[580px] flex-grow-1">
+    <div className="pt-4 w-full flex-grow-1">
       <div className="flex ">
         {filters.map((filter, index) => (
           <Filter key={index} filter={filter} />
         ))}
       </div>
-      <div className="pt-2">
+      <div className="pt-2 flex flex-col gap-4 mb-8">
         {filteredPosts.map((post) => (
           <Post
             key={post._id}
@@ -26,6 +26,7 @@ export default function PostsContainer() {
             user={post.user}
             comments={post.comments || []}
             reactions={post.reactions || []}
+            tags={post.tags}
           />
         ))}
       </div>

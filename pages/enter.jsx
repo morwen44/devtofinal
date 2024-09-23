@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useEffect } from "react";
@@ -9,11 +10,13 @@ import { loginUser } from "../utils/api";
 import { loginSchema } from "../utils/validationSchemas"; 
 import { socialLogins } from "../utils/maps";
 import { useAuth } from "@/context/AuthContext";
+import { useUser } from "@/context/UserContext";
 
 export default function Enter() {
   const router = useRouter();
   const { state } = router.query; 
   const { setIsLoggedIn } = useAuth(); 
+  const { fetchUserInfo } = useUser();
 
   const {
     register,
@@ -40,6 +43,7 @@ export default function Enter() {
       if (result.data.token) {
         localStorage.setItem("token", result.data.token);
         setIsLoggedIn(true); 
+        await fetchUserInfo();
         router.push("/"); 
       }
     } catch (error) {
@@ -50,6 +54,9 @@ export default function Enter() {
   };
 
   return (
+    <> <Head>
+    <title>Welcome! - DEV Community</title>
+  </Head>
     <main className="bg-white min-h-screen min-w-screen flex justify-center ">
       <div className="pt-6 px-2 lg:w-1/2 max-w-screen-sm">
         <div className="flex flex-col items-center">
@@ -195,6 +202,6 @@ export default function Enter() {
           )}
         </p>
       </div>
-    </main>
+    </main></>
   );
 }

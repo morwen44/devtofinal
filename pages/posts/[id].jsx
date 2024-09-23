@@ -7,6 +7,7 @@ import Stats from "@/components/posts/stats";
 import UserCard from "@/components/userCard";
 import Footer from "@/components/footer";
 import { addReaction } from "@/utils/api";
+import Head from "next/head";
 
 export default function PostDetail() {
   const router = useRouter();
@@ -37,6 +38,8 @@ export default function PostDetail() {
   }
 
   return (
+    <>
+      <Head><title>{post.title}</title></Head>
     <MainLayout>
       <main className="flex flex-col min-h-screen mt-4">
         <div className="flex-grow flex justify-center">
@@ -59,6 +62,6 @@ export default function PostDetail() {
         </div>
         <Footer />
       </main>
-    </MainLayout>
+    </MainLayout></>
   );
 }

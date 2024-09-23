@@ -163,3 +163,31 @@ export const addReaction = async (postId, emoji) => {
 
   return await response.json();
 };
+
+export const createPost = async (data) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("User is not authenticated");
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to create post.");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
+  }
+};

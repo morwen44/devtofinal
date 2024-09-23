@@ -38,3 +38,9 @@ export const loginSchema = Yup.object().shape({
     )
     .required("Password is required"),
 });
+
+export const postSchema = Yup.object().shape({
+  image: Yup.string().url("Must be a valid URL").required("Cover image URL is required"),
+  title: Yup.string().required("Post title is required").max(100, "Title must be at most 100 characters"),
+  body: Yup.string().required("Post content is required").min(10, "Content must be at least 10 characters"),
+});

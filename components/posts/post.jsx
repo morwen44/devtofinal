@@ -7,7 +7,7 @@ import Link from "next/link";
 import { formatDate } from "@/utils/dateformat";
 import { addCommentToPost, getCommentsForPost } from "@/utils/api";
 import Reactions from "./reactions";
-
+import Tags from "./tags";
 export default function Post({
   id,
   date,
@@ -18,6 +18,7 @@ export default function Post({
   comments,
   reactions,
   onAddReaction,
+  tags,
 }) {
   const router = useRouter();
   const { register, handleSubmit, watch, reset } = useForm();
@@ -167,7 +168,6 @@ export default function Post({
                 </div>
               </div>
             ))}
-            
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@ export default function Post({
   ) : (
     <Link href={`/posts/${id}`}>
       <div className="rounded-md overflow-hidden bg-white border border-neutral-200 cursor-pointer active:border-purple active:border-2">
-        <div className="relative h-64 w-[580px] ">
+        <div className="relative h-64 w-full ">
           <Image src={image} alt={title} layout="fill" objectFit="cover" />
         </div>
         <div className="grid grid-rows-[auto_auto_auto_auto] ps-6 mt-4">
@@ -193,19 +193,22 @@ export default function Post({
             </div>
           </div>
           <h2 className="text-3xl mt-4 font-bold">{title}</h2>
-          <p className="mt-3">Tags</p>
+          <Tags tags={tags} />
           <div className="grid grid-cols-[auto_1fr_auto] items-center my-4 gap-4">
-            <Reactions
-              reactions={reactions}
-              onAddReaction={onAddReaction}
-              section="home"
-            />
-
+            {reactions.length > 0 && (
+              <Reactions
+                reactions={reactions}
+                onAddReaction={onAddReaction}
+                section="home"
+              />
+            )}
             <div className="flex mx-auto items-center">
-              <p className="text-sm text-neutral-600 ml-10">
-                {totalReactions}{" "}
-                {totalReactions === 1 ? "reaction" : "reactions"}
-              </p>
+              {reactions.length > 0 && (
+                <p className="text-sm text-neutral-600 ml-10">
+                  {totalReactions}{" "}
+                  {totalReactions === 1 ? "reaction" : "reactions"}
+                </p>
+              )}
               <button className="text-purple-600 text-sm flex gap-2 items-center hover:bg-neutral-100 p-2 rounded-md">
                 <Image
                   src="/icons/comment.svg"
@@ -226,7 +229,7 @@ export default function Post({
             </button>
           </div>
 
-          {localComments && localComments.length > 0 ? (
+          {localComments && localComments.length > 0 && (
             <div
               key={localComments[0].user + localComments[0].createdAt}
               className="flex gap-2 mt-4 mb-4 me-8"
@@ -250,8 +253,6 @@ export default function Post({
                 <p className="text-sm">{localComments[0].body}</p>
               </div>
             </div>
-          ) : (
-            <span className="ps-12 text-purple-600 mb-4">Add comment</span>
           )}
         </div>
       </div>

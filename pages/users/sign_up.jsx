@@ -4,6 +4,7 @@ import { signUpUser } from "../../utils/api";
 import { signUpSchema } from "../../utils/validationSchemas";
 import { useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function SignUp() {
   const {
@@ -41,6 +42,8 @@ export default function SignUp() {
   };
 
   return (
+    <>
+    <Head><title>Welcome! - DEV Community</title></Head>
     <main className="bg-white min-h-screen min-w-screen flex justify-center items-center p-4">
       <div className="border border-neutral-100 rounded-md p-8 w-full lg:w-1/2 max-w-screen-sm">
         <h1 className="text-xl font-bold">Create your account</h1>
@@ -157,6 +160,6 @@ export default function SignUp() {
           )}
         </form>
       </div>
-    </main>
+    </main></>
   );
 }

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 import MainLayout from "@/layouts/MainLayout";
-
+import Head from 'next/head';
 export default function SignoutConfirm() {
   const router = useRouter();
   const { setIsLoggedIn } = useAuth(); 
@@ -18,6 +18,8 @@ export default function SignoutConfirm() {
   };
 
   return (
+    <>
+    <Head><title>Confirm Signout - DEV Community</title></Head>
     <MainLayout>
       <div className="flex flex-col justify-center items-center min-h-screen">
         <h1 className="text-2xl font-bold mb-4">
@@ -31,5 +33,6 @@ export default function SignoutConfirm() {
         </button>
       </div>
     </MainLayout>
+    </>
   );
 }
