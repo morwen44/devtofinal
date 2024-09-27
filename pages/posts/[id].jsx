@@ -50,6 +50,7 @@ export default function PostDetail() {
                 comments={post.comments}
                 onAddReaction={handleAddReaction}
                 reactions={localReactions}
+                className="hidden md:block"
               />
               <Post
                 id={post._id}
@@ -63,7 +64,7 @@ export default function PostDetail() {
                 onAddReaction={handleAddReaction}
                 className="col-span-1"
               />
-              <UserCard user={post.user} />
+              <UserCard user={post.user} className="hidden md:block" />
             </div>
           </div>
           <Footer />
