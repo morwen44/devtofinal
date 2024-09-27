@@ -44,7 +44,7 @@ export default function PostDetail() {
       </Head>
       <MainLayout>
         <main className="flex flex-col min-h-screen mt-4">
-          <div className="flex-grow flex justify-center">
+          <div className="flex justify-center">
             <div className="grid grid-cols-1 md:grid-cols-[2rem_56rem_8rem] gap-4 w-full max-w-[1340px] mx-auto px-4 md:px-0">
               <Stats
                 comments={post.comments}
